@@ -15,6 +15,8 @@
   <style>
     :root {
       --tomato: hsl(4, 100%, 67%);
+      --tomato1: #fd9347;
+      --tomato2: hsl(3, 79%, 91%);
       --dark-slate-grey: hsl(234, 29%, 20%);
       --charcoal-grey: hsl(235, 18%, 26%);
       --grey: hsl(231, 7%, 60%);
@@ -44,8 +46,42 @@
     li {
       padding: 0.5rem 0;
       font-weight: 500;
-      color: var(--charcoal-grey);
+      color: var(--dark-slate-grey);
     }
+
+    input::placeholder {
+  color:  var(--grey);
+}
+
+input:not(:focus):invalid {
+  color: var(--tomato);
+  border: 1px solid var(--tomato);
+  background-color: var(--tomato2);
+}
+
+ .errorlabel {
+
+  color: var(--tomato);
+  display: none;
+}
+.button {
+  background-color: var(--charcoal-grey);
+  color: white;
+}
+.button:hover,
+.button:focus-visible {
+  position: relative;
+  background-image: linear-gradient(-90deg,
+    var(--tomato),
+    var(--tomato1)
+  );
+
+
+input > :not(:focus):invalid + .errorlabel {
+  display: block!important;
+}
+
+
 
     /* Custom styling for invalid input */
     .invalid-input {
@@ -61,7 +97,7 @@
     }
 
     .valid-email-label {
-      color: var(--tomato);
+      color: var(--tomato)!important;
     }
 
   </style>
@@ -76,17 +112,17 @@
         <li><img src="./assets/images/icon-list.svg" class="inline mr-2" alt="">Measuring to ensure updates are a success</li>
         <li><img src="./assets/images/icon-list.svg" class="inline mr-2" alt="">And much more!</li>
       </ul>
-      <form id="newsletter" class="pt-8">
+      <form id="newsletter" class="form-group pt-8">
         <div>
           <div class="flex justify-between">
             <label for="email" class="block text-dark text-sm font-bold">Email Address</label>
-            <label id="errorlabel" class=" hidden">Valid email required</label>
+            <label class="errorlabel ">Valid email required</label>
           </div>
           <input type="email" id="emailInput" name="email" placeholder="you@example.com"
             class="mt-1 p-3 w-full border rounded-lg outline-none mb-6" >
     
         </div>
-        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">Subscribe</button>
+        <button type="submit" class="w-full  py-3 rounded-lg button font-semibold">Subscribe to monthly newsletter</button>
         <p id="successMessage" class="text-green-500 mt-4 hidden text-center">Thanks for subscribing!</p>
       </form>
     </div>
@@ -95,6 +131,19 @@
       <img src="./assets/images/illustration-sign-up-desktop.svg" alt="">
     </div>
   </div>
+
+  <!-- Modal HTML -->
+<div id="successModal" class="fixed inset-0 bgColor bg-opacity-50 hidden flex justify-center items-center">
+  <div class="bg-white  white-clr p-12 rounded-3xl shadow-lg ">
+    <img src="./assets/images/icon-success.svg" alt="success">
+    <h2 class="text-5xl font-bold text-dark mt-6">Thanks for <br>subscribing</h2>
+    <p class="text-dark mt-4">    A confirmation email has been sent to <br>
+      <strong id="modalMessage"></strong>. Please open it and click <br> the
+      button inside to confirm your subscription.</p>
+    <button id="closeModal" class="mt-6 w-full  py-3 rounded-lg button">Dismiss message</button>
+  </div>
+</div>
+
 
   <script src="./script.js"></script>
 </body>
